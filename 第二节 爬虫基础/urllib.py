@@ -17,3 +17,6 @@ madata=pa.urlencode({
     'pass':'1234'
 }).encode('utf-8')
 ...
+
+
+https://www.printfriendly.com/
