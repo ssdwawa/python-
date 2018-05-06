@@ -10,8 +10,13 @@ y1=y.max()
 print(y1)
 #切片
 x1=x[0:3]#[:]不写就是从头到尾
-
 print(x1)
+
+#slice 2darry
+y1=y[0:2]#[:]不写就是从头到尾
+print(y1)
+y2=y[2]
+print(y2)
 
 import pandas as pa
 #列表式
@@ -31,3 +36,13 @@ print(b.head(2))#b.tail后几行
 #统计 按列统计
 print(b.describe())
 #转制 b.T
+
+
+#random
+data=numpy.random.random_integers(1,20,3)
+print(data)
+
+#normal
+data2=numpy.random.normal(5,1.0,10)
+print(data2)
+
