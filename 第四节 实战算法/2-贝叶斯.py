@@ -69,3 +69,27 @@ labelsall=['0','1','2','3','4','5','6','7','8','9']
 thisdata=loadData('6_6.txt')
 rst=bys.test(thisdata,labelsall)
 print(rst)
+
+
+
+
+# # 高斯朴素贝叶斯
+# import numpy as np
+# import pandas as pda
+#
+# file='luqu.csv'
+# data=pda.read_csv(file)
+# x=data.iloc[:,1:4].as_matrix()#获取2到3列 同时有标题
+# y=data.iloc[:,0:1].as_matrix()#admit:[400列]
+#
+#
+#
+# # X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
+# # Y = np.array([1, 1, 1, 2, 2, 2])
+# from sklearn.naive_bayes import GaussianNB
+#
+# clf = GaussianNB().fit(x, y.ravel())
+#
+# data=clf.predict([[660,3.67,4]])
+#
+# print(data)
