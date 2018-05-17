@@ -8,6 +8,7 @@
 # 那么我们知道信息熵与条件熵相减就是我们的信息增益，为0.301-0.103=0.198
 #我们可以知道，本来如果我对一个男生什么都不知道的话，作为他的女朋友决定是否嫁给他的不确定性有0.301这么大。
 #当我们知道男朋友的身高信息后，不确定度减少了0.198.也就是说，身高这个特征对于我们广大女生同学来说，决定嫁不嫁给自己的男朋友是很重要的。
+#当确定身高后，把它列为树的第一个分支，分支左边消极右边积极。在二级分支中根据剩下的数据再计算信息增益裂变，以此类推建立模型
 import pandas as pda
 data=pda.read_csv('lesson.csv',encoding='gbk')
 data=data.stack()
@@ -26,6 +27,6 @@ x=data.iloc[:,1:5].as_matrix()
 z=data.iloc[:,5].as_matrix()
 y=data.iloc[:,5].as_matrix().astype(float)
 # print(z)
-# print(y)
+print(y)
 dtc.fit(x,y)
 print(dtc.predict([[0,0,1,1]]))

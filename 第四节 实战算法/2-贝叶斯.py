@@ -93,3 +93,8 @@ print(rst)
 # data=clf.predict([[660,3.67,4]])
 #
 # print(data)
+
+#https://www.jianshu.com/p/f6a3f3200689
+#由于p(tag1,tag2,tag3...|cate1) x p(cate1) = p(tag1|cate1) x p(tag2|cate1) x p(tag3|cate1) x ... x p(cate1)
+#所以先求一下 p(tag1|cate1) ... 用的是这本书标签占总标签的比重，求出来之后都列到一个矩阵中
+#预测时，把预测的矩阵乘以测试矩阵就可以得出概率
