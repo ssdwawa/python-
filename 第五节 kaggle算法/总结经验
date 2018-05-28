@@ -1,0 +1,52 @@
+1.看数据，对数据补全，分析数据与结果的关系
+    看参数和数量的关系
+    train_data.groupby(['Sex','Survived'])['Survived'].count()
+                    banner_pos  click
+                0           0        66649
+                            1        13599
+                1           0        15831
+                            1         3883
+                2           0           18
+                            1            3
+                4           0            5
+                            1            1
+                5           0            6
+                            1            4
+                Name: click, dtype: int64
+
+    看参数对结果的占比
+    df.groupby(['banner_pos']).mean()['click']
+                         banner_pos
+                    0    0.169462
+                    1    0.196967
+                    2    0.142857
+                    4    0.166667
+                    5    0.400000
+    数据补全,数据改变
+    手动补全
+        all_df['Cabin'][(all_df['Cabin'].notnull())]='Yes'
+        all_df['Cabin'][(all_df['Cabin'].isnull())]='No'
+        mean_cols = all_dummy_df.mean()
+        all_dummy_df = all_dummy_df.fillna(mean_cols)
+    众数赋值
+        train_data.Embarked[train_data.Embarked.isnull()] = train_data.Embarked.dropna().mode().values
+    随机森林补值
+        注意 .loc是根据行来筛选数据
+        把数据齐全的行取出来，分割成X和Y，然后做预测。预测结果赋给空值。要预测的值放到第一位。
+        X = age_df_notnull.values[:,1:]
+        Y = age_df_notnull.values[:,0]
+        RFR = RandomForestRegressor(n_estimators=1000, n_jobs=-1)
+        RFR.fit(X,Y)
+        PRE = RFR.predict(age_df_isnull.values[:,1:])
+        age_df['Age'][(age_df['Age'].isnull())]=PRE
+    数据离散分类
+        change_age=pd.qcut(all_df['Age'], 5)
+        all_df['Age'] = pd.factorize(change_age)[0]
+
+2.画图
+    train_data[['Sex','Survived']].groupby(['Sex']).mean().plot.bar() 先选择Sex和Survived关联，然后分类Sex取他发生Survived的概率 绘图
+
+    看数据的图形分类
+    bins = [0, 12, 18, 65, 100]
+    train_data['Age_group'] = pd.cut(train_data['Age'], bins)
+    by_age = train_data.groupby('Age_group')['Survived'].mean()
