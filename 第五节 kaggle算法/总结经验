@@ -1,7 +1,7 @@
 1.看数据，对数据补全，分析数据与结果的关系
     看参数和数量的关系
-    train_data.groupby(['Sex','Survived'])['Survived'].count()
-                    banner_pos  click
+    df.groupby(['banner_pos','click'])['click'].count()
+              banner_pos  click
                 0           0        66649
                             1        13599
                 1           0        15831
@@ -16,12 +16,21 @@
 
     看参数对结果的占比
     df.groupby(['banner_pos']).mean()['click']
-                         banner_pos
+                 banner_pos
                     0    0.169462
                     1    0.196967
                     2    0.142857
                     4    0.166667
                     5    0.400000
+    如果对group的数据进行循环，比如for grp, grp_df in df
+    可发现第一个参数是('Abbott', 20.25)即你规划的特征
+    第二个参数是符合这个参数的全部值，就是一个DataFrame
+    如果对第二个参数  for ind, row in grp_df.iterrows():
+    ind是每个参数在总数据里的位置，而row是以数据的形式把它展示出来
+
+    如果想要修改某一行的值 all_df.loc[ind - 1:ind,'Family_Survival'] = 1
+
+
     数据补全,数据改变
     手动补全
         all_df['Cabin'][(all_df['Cabin'].notnull())]='Yes'
@@ -50,3 +59,7 @@
     bins = [0, 12, 18, 65, 100]
     train_data['Age_group'] = pd.cut(train_data['Age'], bins)
     by_age = train_data.groupby('Age_group')['Survived'].mean()
+
+    根据年龄分类
+    all_df['Age'].hist(bins=70)
+    plt.show()
